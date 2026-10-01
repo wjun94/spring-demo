@@ -2,6 +2,7 @@ package com.study.spring_demo;
 
 import java.util.Map;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @SpringBootApplication
 @RestController
+@MapperScan("com.study.spring_demo.mapper")
 public class SpringDemoApplication {
 
 	public static void main(String[] args) {
