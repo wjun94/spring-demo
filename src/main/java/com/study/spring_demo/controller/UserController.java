@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.study.spring_demo.common.Result;
 import com.study.spring_demo.entity.User;
@@ -86,8 +88,13 @@ public class UserController {
     }
 
     @GetMapping("/page")
-    public Result<Page<User>> findPage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam int pageSize) {
-        return Result.success(userService.page(new Page<>(pageNum, pageSize), null));
+    public Result<Page<User>> findPage(@RequestParam(defaultValue = "1") int pageNum, @RequestParam int pageSize,
+            @RequestParam(required = false) String name) {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        if (StringUtils.hasText(name)) {
+            lambdaQueryWrapper.like(User::getName, name);
+        }
+        return Result.success(userService.page(new Page<>(pageNum, pageSize), lambdaQueryWrapper));
     }
 
     /**
