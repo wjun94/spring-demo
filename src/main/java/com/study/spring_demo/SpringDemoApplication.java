@@ -2,7 +2,6 @@ package com.study.spring_demo;
 
 import java.util.Map;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @SpringBootApplication
 @RestController
-@MapperScan("com.study.spring_demo.mapper")
 public class SpringDemoApplication {
 
 	public static void main(String[] args) {
@@ -29,7 +27,7 @@ public class SpringDemoApplication {
 		return "Hello, Spring Boot! 我的第一个接口成功啦！";
 	}
 
-	@GetMapping("/user/{id}")
+	@GetMapping("/info/{id}")
 	public String getId(@PathVariable String id) {
 		System.out.println("id: " + id);
 		return "Restful GET请求传参，获取到id:" + id;
